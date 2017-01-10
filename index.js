@@ -20,6 +20,9 @@ var through2 = require('through2'),
     defaults = require('lodash.defaults');
 
 module.exports = function(feedOpts, urlPrefix) {
+	// Normal
+	if (urlPrefix[urlPrefix.length - 1] !== '/') urlPrefix += '/';
+
 	return through2.obj(function(file, enc, callback) {
 		var feedConfig = defaults({}, {
 			generator: 'stratic-indexes-to-rss',
