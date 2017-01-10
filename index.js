@@ -16,10 +16,55 @@
 'use strict';
 
 var through2 = require('through2'),
-    rss = require('rss');
+    RSS = require('rss'),
+    defaults = require('lodash.defaults');
 
-module.exports = function() {
+module.exports = function(feedOpts, urlPrefix) {
 	return through2.obj(function(file, enc, callback) {
+		var feedConfig = defaults({}, {
+			generator: 'stratic-indexes-to-rss',
+			feed_url: urlPrefix + file.dirname + 'index.rss',
+			site_url: urlPrefix + file.dirname
+		}, feedOpts);
 
+		switch(file.data.indexType) {
+		case 'main':
+			break;
+		case 'category':
+			feedConfig.title += ' - ' + '\'' + file.data.category + '\' category';
+			break;
+		case 'month':
+			feedConfig.title += ' - ';
+			feedConfig += new Date(1970, file.data.month).toLocaleString('en-us', {month: 'long'});
+			// TODO: I fel like there's something clever and DRY I can do here by letting this fall through...
+			feedConfig.title += ' - ' + file.data.year;
+			break;
+		case 'year':
+			feedConfig.title += ' - ' + file.data.year;
+			break;
+		default:
+			debugger;
+			throw new Error('unknown index type: ' + file.indexType);
+		}
+
+		var feed = new RSS(feedConfig);
+
+		file.data.posts.map(function(post) {
+			return {
+				title: post.title,
+				url: urlPrefix + file.relative,
+				categories: post.categories,
+				// TODO: normalize URLs to absolute URLs
+				// See the `rss` docs for details
+				description: post.contents,
+				date: new Date(post.time.epoch * 1000)
+			};
+		}).forEach(feed.item);
+
+		// Node 6+ uses Buffer.from but earlier versions don't have this, so we fallback
+		file.contents = Buffer.from ? Buffer.from(feed.xml()) : new Buffer(feed.xml());
+
+		this.push(file);
+		callback();
 	});
 };
