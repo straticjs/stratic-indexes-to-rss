@@ -17,17 +17,19 @@
 
 var through2 = require('through2'),
     RSS = require('rss'),
-    defaults = require('lodash.defaults');
+    defaults = require('lodash.defaults'),
+    path = require('path');
 
 module.exports = function(feedOpts, urlPrefix) {
 	// Normal
 	if (urlPrefix[urlPrefix.length - 1] !== '/') urlPrefix += '/';
 
 	return through2.obj(function(file, enc, callback) {
+		var filePath = path.parse(file.relative);
 		var feedConfig = defaults({}, {
 			generator: 'stratic-indexes-to-rss',
-			feed_url: urlPrefix + file.dirname + 'index.rss',
-			site_url: urlPrefix + file.dirname
+			feed_url: urlPrefix + filePath.dir + '/index.rss',
+			site_url: urlPrefix + filePath.dir
 		}, feedOpts);
 
 		switch(file.data.indexType) {
