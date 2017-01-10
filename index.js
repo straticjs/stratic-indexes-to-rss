@@ -35,8 +35,8 @@ module.exports = function(feedOpts, urlPrefix) {
 			break;
 		case 'month':
 			feedConfig.title += ' - ';
-			feedConfig += new Date(1970, file.data.month).toLocaleString('en-us', {month: 'long'});
-			// TODO: I fel like there's something clever and DRY I can do here by letting this fall through...
+			feedConfig.title += new Date(1970, file.data.month).toLocaleString('en-us', {month: 'long'});
+			// TODO: I feel like there's something clever and DRY I can do here by letting this fall through...
 			feedConfig.title += ' - ' + file.data.year;
 			break;
 		case 'year':
