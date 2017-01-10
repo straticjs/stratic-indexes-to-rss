@@ -62,7 +62,9 @@ module.exports = function(feedOpts, urlPrefix) {
 				description: post.contents,
 				date: new Date(post.time.epoch * 1000)
 			};
-		}).forEach(feed.item);
+		}).forEach(function(item) {
+			feed.item(item);
+		});
 
 		// Node 6+ uses Buffer.from but earlier versions don't have this, so we fallback
 		file.contents = Buffer.from ? Buffer.from(feed.xml()) : new Buffer(feed.xml());
