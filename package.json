@@ -1,0 +1,26 @@
+{
+  "name": "stratic-indexes-to-rss",
+  "version": "1.0.0",
+  "description": "Transform Stratic indexes into RSS feeds",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strugee/stratic-indexes-to-rss.git"
+  },
+  "keywords": [
+    "stratic",
+    "gulpplugin"
+  ],
+  "author": "Alex Jordan <alex@strugee.net>",
+  "license": "LGPL-3.0+",
+  "bugs": {
+    "url": "https://github.com/strugee/stratic-indexes-to-rss/issues"
+  },
+  "homepage": "https://github.com/strugee/stratic-indexes-to-rss#readme",
+  "dependencies": {
+    "rss": "^1.2.1"
+  }
+}
