@@ -55,9 +55,14 @@ module.exports = function(feedOpts, urlPrefix) {
 		var feed = new RSS(feedConfig);
 
 		file.data.posts.map(function(post) {
+			// TODO: I don't really know what the right behavior here is
+			// Should we push for clean URLs by default? Make it customizable? I dunno.
+			var _postPath = path.parse(post.relative),
+			    postPath = post.relative.replace(_postPath.ext, '');
+
 			return {
 				title: post.title,
-				url: urlPrefix + post.relative,
+				url: urlPrefix + postPath,
 				categories: post.categories,
 				// TODO: normalize URLs to absolute URLs
 				// See the `rss` docs for details
