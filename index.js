@@ -48,7 +48,6 @@ module.exports = function(feedOpts, urlPrefix) {
 			feedConfig.title += ' - ' + file.data.year;
 			break;
 		default:
-			debugger;
 			throw new Error('unknown index type: ' + file.data.indexType);
 		}
 
