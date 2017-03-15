@@ -49,7 +49,7 @@ module.exports = function(feedOpts, urlPrefix) {
 			break;
 		default:
 			debugger;
-			throw new Error('unknown index type: ' + file.indexType);
+			throw new Error('unknown index type: ' + file.data.indexType);
 		}
 
 		var feed = new RSS(feedConfig);
@@ -61,13 +61,13 @@ module.exports = function(feedOpts, urlPrefix) {
 			    postPath = post.relative.replace(_postPath.ext, '');
 
 			return {
-				title: post.title,
+				title: post.data.title,
 				url: urlPrefix + postPath,
 				categories: post.categories,
 				// TODO: normalize URLs to absolute URLs
 				// See the `rss` docs for details
 				description: post.contents,
-				date: new Date(post.time.epoch * 1000)
+				date: new Date(post.data.time.epoch * 1000)
 			};
 		}).forEach(function(item) {
 			feed.item(item);
