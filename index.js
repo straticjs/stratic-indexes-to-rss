@@ -62,7 +62,7 @@ module.exports = function(feedOpts, urlPrefix) {
 			return {
 				title: post.data.title,
 				url: urlPrefix + postPath,
-				categories: post.categories,
+				categories: post.data.categories,
 				// TODO: normalize URLs to absolute URLs
 				// See the `rss` docs for details
 				description: post.contents,
