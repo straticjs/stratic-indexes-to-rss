@@ -18,6 +18,9 @@
 var through2 = require('through2'),
     RSS = require('rss'),
     defaults = require('lodash.defaults'),
+    ineed = require('ineed'),
+    isRelativeUrl = require('is-relative-url'),
+    urlToolkit = require('url-toolkit'),
     stringToBuffer = require('string-to-buffer'),
     path = require('path');
 
@@ -59,6 +62,13 @@ module.exports = function(feedOpts, urlPrefix) {
 			// Should we push for clean URLs by default? Make it customizable? I dunno.
 			var _postPath = path.parse(post.relative),
 			    postPath = post.relative.replace(_postPath.ext, '');
+
+			// Make relative URLs absolute
+			// TODO handle streams
+			var _content = post.contents.toString();
+			post.contents = stringToBuffer(ineed.reprocess.hyperlinks(function(baseUrl, href) {
+				return isRelativeUrl(href) ? urlToolkit.buildAbsoluteURL(urlPrefix, href, {normalize: true}) : href;
+			}).fromHtml(_content));
 
 			return {
 				title: post.data.title,
