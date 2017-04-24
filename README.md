@@ -1,4 +1,4 @@
-# `stratic-paginate-indexes`
+# `stratic-indexes-to-rss`
 
 [Gulp][1] plugin to convert [Stratic][2] indexes into RSS feeds
 
