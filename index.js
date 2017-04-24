@@ -18,6 +18,7 @@
 var through2 = require('through2'),
     RSS = require('rss'),
     defaults = require('lodash.defaults'),
+    stringToBuffer = require('string-to-buffer'),
     path = require('path');
 
 module.exports = function(feedOpts, urlPrefix) {
@@ -72,8 +73,7 @@ module.exports = function(feedOpts, urlPrefix) {
 			feed.item(item);
 		});
 
-		// Node 6+ uses Buffer.from but earlier versions don't have this, so we fallback
-		file.contents = Buffer.from ? Buffer.from(feed.xml()) : new Buffer(feed.xml());
+		file.contents = stringToBuffer(feed.xml());
 
 		this.push(file);
 		callback();

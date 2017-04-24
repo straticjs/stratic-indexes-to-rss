@@ -22,6 +22,7 @@
   "homepage": "https://github.com/strugee/stratic-indexes-to-rss#readme",
   "dependencies": {
     "lodash.defaults": "^4.2.0",
-    "rss": "^1.2.1"
+    "rss": "^1.2.1",
+    "string-to-buffer": "^1.0.1"
   }
 }
