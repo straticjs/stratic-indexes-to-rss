@@ -61,6 +61,12 @@ gulp.task('rss', function() {
 });
 ```
 
+## Code of Conduct
+
+Please note that StraticJS is developed under the [Contributor Covenant][4] Code of Conduct. Project contributors are expected to respect these terms.
+
+For the full Code of Conduct, see [CODE_OF_CONDUCT.md][5]. Violations may be reported to <alex@strugee.net>.
+
 ## License
 
 LGPL 3.0+
@@ -72,3 +78,5 @@ Alex Jordan <alex@strugee.net>
  [1]: http://gulpjs.com/
  [2]: https://github.com/strugee/generator-stratic
  [3]: https://npmjs.com/package/rss
+ [4]: http://contributor-covenant.org/
+ [5]: https://github.com/straticjs/stratic-indexes-to-rss/blob/master/CODE_OF_CONDUCT.md
