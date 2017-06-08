@@ -26,6 +26,7 @@
     "lodash.defaults": "^4.2.0",
     "rss": "^1.2.1",
     "string-to-buffer": "^1.0.1",
+    "through2": "^2.0.3",
     "url-toolkit": "^2.1.1"
   }
 }
