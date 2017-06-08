@@ -2,6 +2,12 @@
 
 `stratic-indexes-to-rss` follows [Semantic Versioning][1].
 
+## 1.0.2 - 2017-06-08
+
+### Fixed
+
+* Add missing through2 dependency
+
 ## 1.0.1 - 2017-04-24
 
 ### Fixed
