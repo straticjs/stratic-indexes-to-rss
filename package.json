@@ -1,6 +1,6 @@
 {
   "name": "stratic-indexes-to-rss",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Transform Stratic indexes into RSS feeds",
   "main": "index.js",
   "scripts": {
