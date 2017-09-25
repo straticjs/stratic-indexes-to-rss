@@ -74,8 +74,6 @@ module.exports = function(feedOpts, urlPrefix) {
 				title: post.data.title,
 				url: urlPrefix + postPath,
 				categories: post.data.categories,
-				// TODO: normalize URLs to absolute URLs
-				// See the `rss` docs for details
 				description: post.contents,
 				date: new Date(post.data.time.epoch * 1000)
 			};
