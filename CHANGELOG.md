@@ -2,6 +2,12 @@
 
 `stratic-indexes-to-rss` follows [Semantic Versioning][1].
 
+## 1.1.0 - 2017-09-24
+
+### Fixed
+
+* UTC offset information is properly taken into account (straticjs/RFCs#28)
+
 ## 1.0.2 - 2017-06-08
 
 ### Fixed
