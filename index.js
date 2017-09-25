@@ -22,6 +22,7 @@ var through2 = require('through2'),
     isRelativeUrl = require('is-relative-url'),
     urlToolkit = require('url-toolkit'),
     stringToBuffer = require('string-to-buffer'),
+    handleOffset = require('stratic-handle-offset'),
     path = require('path');
 
 module.exports = function(feedOpts, urlPrefix) {
@@ -70,12 +71,36 @@ module.exports = function(feedOpts, urlPrefix) {
 				return isRelativeUrl(href) ? urlToolkit.buildAbsoluteURL(urlPrefix, href, {normalize: true}) : href;
 			}).fromHtml(_content));
 
+			/*
+
+			  This is kind of an evil hack.
+
+			  The problem is that the `rss` module takes a JavaScript Date object, but we like to
+			  use MomentJS moments to handle the timezone offset correctly. There's a
+			  moment#toDate method, except that this returns a JavaScript Date which will consider
+			  the date to be in the host system's local time, not the UTC offset recorded in the
+			  post. Which is the bug we were trying to avoid by using MomentJS in the first place.
+
+			  So, what we do is we set the moment to UTC mode so the host system's timezone
+			  doesn't interfere. Then, we perform the offset ourselves so that the moment's UTC
+			  time information has all the same numbers as the post's local time. We can then
+			  convert it to a native Date object and the usual methods like Date#getDate will work
+			  okay.
+
+			  Obviously the resultant Date object's notion of timezone or offset information is
+			  royally fucked, but I'm guessing `rss` doesn't care about any of that and just needs
+			  the basic stuff. So this works, somehow.
+
+			 */
+			var moment = handleOffset(post.data.time);
+			var date = moment.add(moment.utcOffset(), 'minutes').utc().toDate();
+
 			return {
 				title: post.data.title,
 				url: urlPrefix + postPath,
 				categories: post.data.categories,
 				description: post.contents,
-				date: new Date(post.data.time.epoch * 1000)
+				date: date
 			};
 		}).forEach(function(item) {
 			feed.item(item);
