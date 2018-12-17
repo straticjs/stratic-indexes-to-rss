@@ -2,6 +2,16 @@
 
 `stratic-indexes-to-rss` follows [Semantic Versioning][1].
 
+## 2.0.0 - future
+
+### Fixed
+
+* Remove deprecated `string-to-buffer` module
+
+### Breaking
+
+* Drop Node 4 support
+
 ## 1.1.0 - 2017-09-24
 
 ### Fixed

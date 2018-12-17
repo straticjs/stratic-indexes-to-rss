@@ -21,7 +21,6 @@ var through2 = require('through2'),
     ineed = require('ineed'),
     isRelativeUrl = require('is-relative-url'),
     urlToolkit = require('url-toolkit'),
-    stringToBuffer = require('string-to-buffer'),
     handleOffset = require('stratic-handle-offset'),
     path = require('path');
 
@@ -67,7 +66,7 @@ module.exports = function(feedOpts, urlPrefix) {
 			// Make relative URLs absolute
 			// TODO handle streams
 			var _content = post.contents.toString();
-			post.contents = stringToBuffer(ineed.reprocess.hyperlinks(function(baseUrl, href) {
+			post.contents = Buffer.from(ineed.reprocess.hyperlinks(function(baseUrl, href) {
 				return isRelativeUrl(href) ? urlToolkit.buildAbsoluteURL(urlPrefix, href, {normalize: true}) : href;
 			}).fromHtml(_content));
 
