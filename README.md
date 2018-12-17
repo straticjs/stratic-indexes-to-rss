@@ -76,7 +76,7 @@ LGPL 3.0+
 AJ Jordan <alex@strugee.net>
 
  [1]: http://gulpjs.com/
- [2]: https://github.com/strugee/generator-stratic
+ [2]: https://github.com/straticjs/generator-stratic
  [3]: https://npmjs.com/package/rss
  [4]: http://contributor-covenant.org/
  [5]: https://github.com/straticjs/stratic-indexes-to-rss/blob/master/CODE_OF_CONDUCT.md
