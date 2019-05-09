@@ -105,7 +105,7 @@ module.exports = function(feedOpts, urlPrefix) {
 			feed.item(item);
 		});
 
-		file.contents = stringToBuffer(feed.xml());
+		file.contents = Buffer.from(feed.xml());
 
 		this.push(file);
 		callback();
